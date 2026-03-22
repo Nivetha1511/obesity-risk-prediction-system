@@ -1,6 +1,6 @@
-# A Data-Centric Deep Learning Based Mobile Application for Predicting Early Warnings and Symptoms of Adolescent Obesity
+# ObesiCare: A Data-Centric Deep Learning Based Mobile Application for Predicting Early Warnings and Symptoms of Adolescent Obesity
 
-This project is a full-stack AI-powered healthcare web application that predicts obesity risk levels using an ANN model trained with TensorFlow/Keras and provides lifestyle recommendations through a mobile-style web interface.
+This project is a full-stack AI-powered healthcare web application, ObesiCare, that predicts obesity risk levels using an ANN model trained with TensorFlow/Keras and provides lifestyle recommendations through a mobile-style web interface.
 
 ## Project Structure
 
@@ -92,12 +92,11 @@ Login -> Health Questionnaire -> Flask API /predict -> StandardScaler preprocess
 
 ## Frontend (Mobile-style)
 
-- login.html: User profile collection (name, mobile, email, optional API URL)
+- login.html: User profile collection (name, mobile, email)
 - form.html: Health and lifestyle questionnaire
 - result.html: Predicted risk, confidence, personalized recommendations
 - localStorage used to retain:
   - userProfile
-  - apiBaseUrl
   - lastQuestionnaire
   - predictionResult
 
@@ -126,7 +125,7 @@ python test_api.py
 4. Start command:
    gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 2 --timeout 120
 5. Upload model artifacts to backend/models (or run training during build pipeline and persist artifacts if your deploy process supports it).
-6. Copy Render HTTPS URL and set it in frontend login page as API Base URL.
+6. Set the frontend API base in frontend/script.js to your Render HTTPS backend URL for production deployment.
 
 ## Recommendation Logic
 

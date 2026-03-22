@@ -56,7 +56,7 @@ def parse_payload(payload: dict) -> np.ndarray:
 def home():
     return jsonify(
         {
-            "service": "Obesity Risk Prediction API",
+            "service": "ObesiCare API",
             "status": "running",
             "endpoint": "/predict",
         }
