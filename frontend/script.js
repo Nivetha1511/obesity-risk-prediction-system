@@ -4,6 +4,37 @@ const API_BASE_URLS = [
   "http://localhost:5000",
 ];
 let ACTIVE_API_BASE_URL = null;
+let deferredInstallPrompt = null;
+
+function setupInstallPrompt() {
+  const installSection = document.getElementById("installAppSection");
+  const installButton = document.getElementById("installAppBtn");
+
+  if (!installSection || !installButton) return;
+
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    installSection.hidden = false;
+  });
+
+  installButton.addEventListener("click", async () => {
+    if (!deferredInstallPrompt) return;
+
+    deferredInstallPrompt.prompt();
+    try {
+      await deferredInstallPrompt.userChoice;
+    } finally {
+      deferredInstallPrompt = null;
+      installSection.hidden = true;
+    }
+  });
+
+  window.addEventListener("appinstalled", () => {
+    deferredInstallPrompt = null;
+    installSection.hidden = true;
+  });
+}
 
 function recommendationByRisk(classIndex) {
   const baseAdvice = [
@@ -113,6 +144,8 @@ function setApiStatus(statusElement, state, text) {
 async function handleLoginPage() {
   const loginForm = document.getElementById("loginForm");
   if (!loginForm) return;
+
+  setupInstallPrompt();
 
   loginForm.addEventListener("submit", (event) => {
     event.preventDefault();

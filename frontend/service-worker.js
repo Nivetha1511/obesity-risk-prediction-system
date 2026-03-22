@@ -1,4 +1,4 @@
-const CACHE_NAME = "obesicare-v1";
+const CACHE_NAME = "obesicare-v2";
 const urlsToCache = [
   "/",
   "/index.html",
@@ -8,6 +8,8 @@ const urlsToCache = [
   "/style.css",
   "/script.js",
   "/manifest.json",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
 ];
 
 // Install event - cache assets

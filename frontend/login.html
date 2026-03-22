@@ -32,6 +32,11 @@
         <span>Clinical Style Report</span>
       </div>
 
+      <div id="installAppSection" class="install-app" hidden>
+        <p>Install ObesiCare on this device for quick access.</p>
+        <button type="button" id="installAppBtn">Install App</button>
+      </div>
+
       <form id="loginForm" class="form-grid">
         <label>
           Full Name
@@ -56,7 +61,7 @@
   <script src="script.js"></script>
   <script>
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js')
+      navigator.serviceWorker.register('service-worker.js')
         .then((reg) => console.log('Service Worker registered:', reg))
         .catch((err) => console.log('Service Worker registration failed:', err));
     }
