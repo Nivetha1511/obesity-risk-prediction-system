@@ -1,4 +1,8 @@
-const API_BASE_URLS = ["http://127.0.0.1:5000", "http://localhost:5000"];
+const API_BASE_URLS = [
+  "https://obesity-risk-prediction-system.onrender.com",
+  "http://127.0.0.1:5000",
+  "http://localhost:5000",
+];
 let ACTIVE_API_BASE_URL = null;
 
 function recommendationByRisk(classIndex) {
