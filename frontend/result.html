@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obesity Risk App | Result</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="result">
+  <main class="phone-shell">
+    <section class="card">
+      <div class="app-head">
+        <div class="app-logo">+</div>
+        <div>
+          <p class="app-name">MediGuard Teen</p>
+          <p class="app-tag">Prediction Summary</p>
+        </div>
+      </div>
+
+      <p class="eyebrow">Prediction Output</p>
+      <h1>Your Obesity Risk Assessment</h1>
+      <p class="subtitle" id="userGreeting"></p>
+
+      <div class="result-block">
+        <p id="riskBadge" class="risk-badge">Risk Level</p>
+        <h2 id="riskLevel">-</h2>
+        <p id="confidence">Confidence: -</p>
+        <div class="confidence-track" aria-hidden="true">
+          <div id="confidenceFill" class="confidence-fill"></div>
+        </div>
+      </div>
+
+      <section class="recommendations">
+        <h3>Personalized Recommendations</h3>
+        <ul id="recommendationList"></ul>
+      </section>
+
+      <div class="actions">
+        <a href="form.html" class="secondary-btn">Retake Questionnaire</a>
+        <a href="login.html" class="secondary-btn">Back to Login</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obesity Risk App | Health Questionnaire</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="form">
+  <main class="phone-shell">
+    <section class="card">
+      <div class="app-head">
+        <div class="app-logo">+</div>
+        <div>
+          <p class="app-name">MediGuard Teen</p>
+          <p class="app-tag">Screening Questionnaire</p>
+        </div>
+      </div>
+
+      <p class="eyebrow">Health Questionnaire</p>
+      <h1>Lifestyle & Physical Inputs</h1>
+      <p class="subtitle">Please complete all fields to generate your obesity risk prediction.</p>
+
+      <div class="status-row">
+        <span id="apiStatus" class="status-pill status-checking">Checking backend connection...</span>
+      </div>
+
+      <form id="healthForm" class="form-grid">
+        <label>Gender
+          <select name="Gender" required>
+            <option value="" disabled selected>Select</option>
+            <option value="0">Female</option>
+            <option value="1">Male</option>
+          </select>
+        </label>
+
+        <label>Age
+          <input type="number" name="Age" required min="10" max="100" step="1" />
+        </label>
+
+        <label>Height (meters or cm)
+          <input type="number" name="Height" required min="1.2" max="230" step="0.01" placeholder="e.g. 1.70 or 170" />
+        </label>
+
+        <label>Weight (kg)
+          <input type="number" name="Weight" required min="20" max="250" step="0.1" />
+        </label>
+
+        <label>Family History of Obesity
+          <select name="family_history_with_overweight" required>
+            <option value="" disabled selected>Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </label>
+
+        <label>Frequent High-Calorie Food (FAVC)
+          <select name="FAVC" required>
+            <option value="" disabled selected>Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </label>
+
+        <label>Vegetable Consumption (FCVC)
+          <select name="FCVC" required>
+            <option value="" disabled selected>Select</option>
+            <option value="1">Low</option>
+            <option value="2">Medium</option>
+            <option value="3">High</option>
+          </select>
+        </label>
+
+        <label>Number of Meals per Day (NCP)
+          <select name="NCP" required>
+            <option value="" disabled selected>Select</option>
+            <option value="1">1 Meal</option>
+            <option value="2">2 Meals</option>
+            <option value="3">3 Meals</option>
+            <option value="4">4+ Meals</option>
+          </select>
+        </label>
+
+        <label>Eating Between Meals (CAEC)
+          <select name="CAEC" required>
+            <option value="" disabled selected>Select</option>
+            <option value="0">No</option>
+            <option value="1">Sometimes</option>
+            <option value="2">Frequently</option>
+            <option value="3">Always</option>
+          </select>
+        </label>
+
+        <label>Smoking Habits (SMOKE)
+          <select name="SMOKE" required>
+            <option value="" disabled selected>Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </label>
+
+        <label>Daily Water Consumption (CH2O)
+          <select name="CH2O" required>
+            <option value="" disabled selected>Select</option>
+            <option value="1">Low</option>
+            <option value="2">Moderate</option>
+            <option value="3">High</option>
+          </select>
+        </label>
+
+        <label>Calorie Monitoring (SCC)
+          <select name="SCC" required>
+            <option value="" disabled selected>Select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select>
+        </label>
+
+        <label>Physical Activity Duration (FAF)
+          <select name="FAF" required>
+            <option value="" disabled selected>Select</option>
+            <option value="0">None</option>
+            <option value="1">Low</option>
+            <option value="2">Moderate</option>
+            <option value="3">High</option>
+          </select>
+        </label>
+
+        <label>Screen Time (TUE)
+          <select name="TUE" required>
+            <option value="" disabled selected>Select</option>
+            <option value="0">Low</option>
+            <option value="1">Moderate</option>
+            <option value="2">High</option>
+          </select>
+        </label>
+
+        <label>Alcohol Consumption (CALC)
+          <select name="CALC" required>
+            <option value="" disabled selected>Select</option>
+            <option value="0">No</option>
+            <option value="1">Sometimes</option>
+            <option value="2">Frequently</option>
+            <option value="3">Always</option>
+          </select>
+        </label>
+
+        <label>Transportation Method (MTRANS)
+          <select name="MTRANS" required>
+            <option value="" disabled selected>Select</option>
+            <option value="0">Automobile</option>
+            <option value="1">Bike</option>
+            <option value="2">Motorbike</option>
+            <option value="3">Public Transportation</option>
+            <option value="4">Walking</option>
+          </select>
+        </label>
+
+        <button type="submit">Predict Obesity Risk</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

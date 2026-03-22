@@ -1,0 +1,336 @@
+:root {
+  --medical-blue-950: #082742;
+  --medical-blue-900: #0b3c6e;
+  --medical-blue-700: #1565b0;
+  --medical-blue-500: #1d87d9;
+  --medical-blue-100: #e9f4ff;
+  --medical-white: #ffffff;
+  --medical-text: #0e2438;
+  --medical-muted: #58708a;
+  --risk-accent: #0076d6;
+  --ok: #1b8a5a;
+  --warn: #d68b00;
+  --danger: #bf2f37;
+  --shadow-soft: 0 16px 35px rgba(9, 53, 94, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  color: var(--medical-text);
+  background:
+    radial-gradient(circle at 16% 8%, rgba(255, 255, 255, 0.82), transparent 34%),
+    radial-gradient(circle at 85% 16%, rgba(10, 144, 224, 0.24), transparent 40%),
+    radial-gradient(circle at 86% 84%, rgba(10, 72, 123, 0.18), transparent 42%),
+    linear-gradient(135deg, #d1e7fb 0%, #eff8ff 45%, #d5ebff 100%);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.phone-shell {
+  width: min(430px, 100%);
+}
+
+.card {
+  background: linear-gradient(180deg, #ffffff 0%, #f4faff 100%);
+  border: 1px solid rgba(21, 101, 176, 0.15);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  padding: 24px 20px;
+  animation: cardLift 600ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(29, 135, 217, 0.32) 0%, rgba(29, 135, 217, 0) 72%);
+  pointer-events: none;
+}
+
+.app-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.app-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--medical-blue-900), var(--medical-blue-500));
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.app-name {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--medical-blue-950);
+}
+
+.app-tag {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--medical-muted);
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--medical-blue-700);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 10px 0 6px;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.subtitle {
+  margin: 0 0 18px;
+  color: var(--medical-muted);
+  font-size: 0.92rem;
+}
+
+.info-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.info-strip span {
+  font-size: 0.74rem;
+  font-weight: 600;
+  border: 1px solid rgba(21, 101, 176, 0.25);
+  background: rgba(233, 244, 255, 0.7);
+  color: var(--medical-blue-900);
+  border-radius: 999px;
+  padding: 5px 10px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 13px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+input,
+select {
+  width: 100%;
+  border: 1px solid rgba(10, 68, 120, 0.25);
+  background: #fff;
+  border-radius: 12px;
+  padding: 11px 12px;
+  font-size: 0.92rem;
+  color: var(--medical-text);
+  outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--medical-blue-500);
+  box-shadow: 0 0 0 3px rgba(29, 135, 217, 0.2);
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, var(--medical-blue-700), var(--medical-blue-500));
+  cursor: pointer;
+  margin-top: 4px;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  filter: saturate(0.4);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.result-block {
+  background: var(--medical-blue-100);
+  border-left: 5px solid var(--risk-accent);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: 10px 0 16px;
+}
+
+.risk-badge {
+  margin: 0 0 6px;
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--warn);
+}
+
+.risk-low {
+  background: var(--ok);
+}
+
+.risk-mid {
+  background: var(--warn);
+}
+
+.risk-high {
+  background: var(--danger);
+}
+
+.result-block h2 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+}
+
+.result-block p {
+  margin: 0;
+  color: #084b84;
+  font-weight: 600;
+}
+
+.confidence-track {
+  margin-top: 10px;
+  width: 100%;
+  height: 9px;
+  background: rgba(11, 60, 110, 0.16);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #11a77c 0%, #1d87d9 100%);
+  transition: width 400ms ease;
+}
+
+.status-row {
+  margin-bottom: 14px;
+}
+
+.status-pill {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.status-checking {
+  color: #7a5b00;
+  background: #fff3d5;
+  border: 1px solid #ffd57a;
+}
+
+.status-online {
+  color: #06603d;
+  background: #daf6ea;
+  border: 1px solid #87d8b5;
+}
+
+.status-offline {
+  color: #8f1f26;
+  background: #ffe1e5;
+  border: 1px solid #ffb7c0;
+}
+
+.recommendations h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.recommendations ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--medical-text);
+  display: grid;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.secondary-btn {
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid rgba(21, 101, 176, 0.35);
+  color: var(--medical-blue-900);
+  background: #fff;
+  padding: 11px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.secondary-btn:hover {
+  background: #f0f8ff;
+}
+
+@media (max-width: 420px) {
+  .card {
+    border-radius: 20px;
+    padding: 20px 16px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+
+@keyframes cardLift {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obesity Risk App | Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="login">
+  <main class="phone-shell">
+    <section class="card">
+      <div class="app-head">
+        <div class="app-logo">+</div>
+        <div>
+          <p class="app-name">MediGuard Teen</p>
+          <p class="app-tag">AI Lifestyle Risk Screening</p>
+        </div>
+      </div>
+
+      <p class="eyebrow">Healthcare AI Assistant</p>
+      <h1>Adolescent Obesity Early Warning</h1>
+      <p class="subtitle">Log in to begin your personalized lifestyle assessment.</p>
+
+      <div class="info-strip">
+        <span>Secure</span>
+        <span>2-Minute Form</span>
+        <span>Clinical Style Report</span>
+      </div>
+
+      <form id="loginForm" class="form-grid">
+        <label>
+          Full Name
+          <input type="text" name="name" required placeholder="Enter your full name" />
+        </label>
+
+        <label>
+          Mobile Number
+          <input type="tel" name="mobile" required pattern="[0-9]{10,15}" placeholder="e.g. 9876543210" />
+        </label>
+
+        <label>
+          Email Address
+          <input type="email" name="email" required placeholder="you@example.com" />
+        </label>
+
+        <button type="submit">Continue to Health Form</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
