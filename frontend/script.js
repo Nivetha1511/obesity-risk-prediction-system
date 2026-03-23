@@ -195,18 +195,19 @@ async function handleFormPage() {
     try {
       const payload = parseFormValues(healthForm);
       
-      // Add user information from localStorage (set during login)
+      // Allow direct access without login - user can submit anonymously or with login
       const userId = localStorage.getItem('user_id');
       const userName = localStorage.getItem('user_name');
       
-      if (!userId || !userName) {
-        alert('User session expired. Please login again.');
-        window.location.href = 'login.html';
-        return;
+      // If user is logged in, include their info. Otherwise submit anonymously.
+      if (userId && userName) {
+        payload.user_id = parseInt(userId);
+        payload.user_name = userName;
+      } else {
+        // Anonymous submission when accessed directly without login
+        payload.user_id = null;
+        payload.user_name = "Anonymous User";
       }
-      
-      payload.user_id = parseInt(userId);
-      payload.user_name = userName;
       
       localStorage.setItem("lastQuestionnaire", JSON.stringify(payload));
 
