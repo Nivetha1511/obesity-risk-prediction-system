@@ -1,7 +1,6 @@
 from pathlib import Path
 from threading import Lock
 from datetime import datetime
-import csv
 import hashlib
 import secrets
 import json
@@ -11,6 +10,8 @@ import numpy as np
 from flask import Flask, jsonify, request, session
 from flask_cors import CORS
 from tensorflow.keras.models import load_model
+from openpyxl import Workbook, load_workbook
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 
 
 app = Flask(__name__)
@@ -21,8 +22,7 @@ MODEL_DIR = Path(__file__).resolve().parent / "models"
 DATA_DIR = Path(__file__).resolve().parent / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
-USERS_CSV = DATA_DIR / "users.csv"
-PATIENT_DATA_CSV = DATA_DIR / "patient_data.csv"
+PATIENT_DB_FILE = DATA_DIR / "patient_database.xlsx"
 
 MODEL_LOCK = Lock()
 MODEL = None
@@ -32,19 +32,49 @@ FEATURE_COLUMNS = None
 RISK_LEVEL_MAP = None
 
 
-def init_csv_files():
-    """Initialize CSV files if they don't exist."""
-    if not USERS_CSV.exists():
-        with open(USERS_CSV, 'w', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(['user_id', 'name', 'password_hash', 'created_at'])
-    
-    if not PATIENT_DATA_CSV.exists():
-        with open(PATIENT_DATA_CSV, 'w', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(['patient_id', 'user_id', 'user_name', 'gender', 'age', 'height', 'weight', 
+def init_excel_workbook():
+    """Initialize Excel workbook with sheets if it doesn't exist."""
+    if not PATIENT_DB_FILE.exists():
+        wb = Workbook()
+        
+        # Create Users sheet
+        ws_users = wb.active
+        ws_users.title = "Users"
+        headers_users = ['user_id', 'name', 'password_hash', 'created_at']
+        ws_users.append(headers_users)
+        
+        # Style header row
+        header_fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
+        header_font = Font(bold=True, color="FFFFFF")
+        for cell in ws_users[1]:
+            cell.fill = header_fill
+            cell.font = header_font
+            cell.alignment = Alignment(horizontal="center", vertical="center")
+        
+        # Create Patient Data sheet
+        ws_patients = wb.create_sheet("Patient Data")
+        headers_patients = ['patient_id', 'user_id', 'user_name', 'gender', 'age', 'height', 'weight', 
                            'family_history_with_overweight', 'FAVC', 'FCVC', 'NCP', 'CAEC', 'CH2O', 
-                           'SCC', 'PAL', 'MTRANS', 'predicted_risk_level', 'confidence', 'created_at', 'result_data'])
+                           'SCC', 'PAL', 'MTRANS', 'predicted_risk_level', 'confidence', 'created_at', 'SMOKE', 'FAF', 'TUE', 'CALC']
+        ws_patients.append(headers_patients)
+        
+        # Style header row
+        for cell in ws_patients[1]:
+            cell.fill = header_fill
+            cell.font = header_font
+            cell.alignment = Alignment(horizontal="center", vertical="center")
+        
+        # Auto-adjust column widths
+        for ws in [ws_users, ws_patients]:
+            for column in ws.columns:
+                max_length = 12
+                column_letter = column[0].column_letter
+                ws.column_dimensions[column_letter].width = max_length
+        
+        wb.save(PATIENT_DB_FILE)
+        return wb
+    else:
+        return load_workbook(PATIENT_DB_FILE)
 
 
 def hash_password(password):
@@ -54,47 +84,42 @@ def hash_password(password):
 
 def get_next_user_id():
     """Get the next available user ID."""
-    if not USERS_CSV.exists():
-        return 1
-    with open(USERS_CSV, 'r') as f:
-        reader = csv.reader(f)
-        next(reader)  # Skip header
-        rows = list(reader)
-        return len(rows) + 1 if rows else 1
+    wb = load_workbook(PATIENT_DB_FILE)
+    ws = wb["Users"]
+    return ws.max_row  # max_row includes header, so this is correct
 
 
 def get_next_patient_id():
     """Get the next available patient ID."""
-    if not PATIENT_DATA_CSV.exists():
-        return 1
-    with open(PATIENT_DATA_CSV, 'r') as f:
-        reader = csv.reader(f)
-        next(reader)  # Skip header
-        rows = list(reader)
-        return len(rows) + 1 if rows else 1
+    wb = load_workbook(PATIENT_DB_FILE)
+    ws = wb["Patient Data"]
+    return ws.max_row  # max_row includes header
 
 
 def user_exists(name):
     """Check if a username already exists."""
-    if not USERS_CSV.exists():
-        return False
-    with open(USERS_CSV, 'r') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if row['name'] == name:
-                return True
+    wb = load_workbook(PATIENT_DB_FILE)
+    ws = wb["Users"]
+    
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        if row[1] == name:  # name is in column 2 (index 1)
+            return True
     return False
 
 
 def get_user_by_name(name):
     """Get user by name."""
-    if not USERS_CSV.exists():
-        return None
-    with open(USERS_CSV, 'r') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if row['name'] == name:
-                return row
+    wb = load_workbook(PATIENT_DB_FILE)
+    ws = wb["Users"]
+    
+    for row in ws.iter_rows(min_row=2, values_only=False):
+        if row[1].value == name:  # name is in column 2
+            return {
+                'user_id': row[0].value,
+                'name': row[1].value,
+                'password_hash': row[2].value,
+                'created_at': row[3].value
+            }
     return None
 
 
@@ -144,7 +169,7 @@ def home():
 def register():
     """Register a new user with name and password."""
     try:
-        init_csv_files()
+        init_excel_workbook()
         
         payload = request.get_json(silent=True)
         if not payload:
@@ -166,9 +191,10 @@ def register():
         password_hash = hash_password(password)
         created_at = datetime.now().isoformat()
         
-        with open(USERS_CSV, 'a', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow([user_id, name, password_hash, created_at])
+        wb = load_workbook(PATIENT_DB_FILE)
+        ws = wb["Users"]
+        ws.append([user_id, name, password_hash, created_at])
+        wb.save(PATIENT_DB_FILE)
         
         return jsonify({
             "success": True,
@@ -185,7 +211,7 @@ def register():
 def login():
     """Login user with name and password."""
     try:
-        init_csv_files()
+        init_excel_workbook()
         
         payload = request.get_json(silent=True)
         if not payload:
@@ -229,7 +255,7 @@ def logout():
 @app.post("/predict")
 def predict():
     try:
-        init_csv_files()
+        init_excel_workbook()
         load_artifacts()
 
         payload = request.get_json(silent=True)
@@ -256,7 +282,7 @@ def predict():
             str(TARGET_ENCODER.inverse_transform([predicted_class_index])[0]),
         )
 
-        # Store patient data for future reference and personalization
+        # Store patient data
         patient_id = get_next_patient_id()
         created_at = datetime.now().isoformat()
         
@@ -278,18 +304,32 @@ def predict():
             payload.get('PAL', ''),
             payload.get('MTRANS', ''),
             predicted_risk_level,
-            confidence,
+            round(confidence, 4),
             created_at,
-            json.dumps({
-                "predicted_class_index": predicted_class_index,
-                "confidence": confidence,
-                "probabilities": probabilities.tolist()
-            })
+            payload.get('SMOKE', ''),
+            payload.get('FAF', ''),
+            payload.get('TUE', ''),
+            payload.get('CALC', '')
         ]
         
-        with open(PATIENT_DATA_CSV, 'a', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(patient_record)
+        wb = load_workbook(PATIENT_DB_FILE)
+        ws = wb["Patient Data"]
+        ws.append(patient_record)
+        
+        # Color code risk level
+        last_row = ws.max_row
+        risk_cell = ws.cell(row=last_row, column=17)  # predicted_risk_level column
+        
+        if predicted_risk_level == "Insufficient_Weight":
+            risk_cell.fill = PatternFill(start_color="92D050", end_color="92D050", fill_type="solid")
+        elif predicted_risk_level in ["Normal_Weight", "Overweight_Level_I"]:
+            risk_cell.fill = PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid")
+        elif predicted_risk_level in ["Overweight_Level_II", "Obesity_Type_I"]:
+            risk_cell.fill = PatternFill(start_color="FFCC00", end_color="FFCC00", fill_type="solid")
+        elif predicted_risk_level in ["Obesity_Type_II", "Obesity_Type_III"]:
+            risk_cell.fill = PatternFill(start_color="FF6B6B", end_color="FF6B6B", fill_type="solid")
+        
+        wb.save(PATIENT_DB_FILE)
 
         return jsonify(
             {
@@ -297,7 +337,7 @@ def predict():
                 "predicted_risk_level": predicted_risk_level,
                 "confidence": round(confidence, 4),
                 "patient_id": patient_id,
-                "message": "Prediction saved to patient record."
+                "message": "Prediction saved to patient record in Excel."
             }
         )
     except ValueError as exc:
@@ -308,19 +348,22 @@ def predict():
         return jsonify({"error": f"Unexpected server error: {exc}"}), 500
 
 
-
 @app.get("/patient-history/<int:user_id>")
 def get_patient_history(user_id):
     """Retrieve all health records for a patient (for personalization)."""
     try:
-        init_csv_files()
+        init_excel_workbook()
         
         records = []
-        with open(PATIENT_DATA_CSV, 'r') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                if int(row['user_id']) == user_id:
-                    records.append(row)
+        wb = load_workbook(PATIENT_DB_FILE)
+        ws = wb["Patient Data"]
+        
+        headers = [cell.value for cell in ws[1]]
+        
+        for row in ws.iter_rows(min_row=2, values_only=True):
+            if row[1] == user_id:  # user_id is in column 2
+                record = dict(zip(headers, row))
+                records.append(record)
         
         if not records:
             return jsonify({"error": "No records found for this user."}), 404
@@ -336,7 +379,7 @@ def get_patient_history(user_id):
 
 
 if __name__ == "__main__":
-    init_csv_files()
+    init_excel_workbook()
     app.run(debug=True)
 
 
