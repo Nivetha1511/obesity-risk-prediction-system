@@ -1,32 +1,29 @@
 :root {
-  /* Matcha Green Color Palette */
-  --matcha-green-950: #2d5016;
-  --matcha-green-900: #33691e;
-  --matcha-green-700: #558b2f;
-  --matcha-green-500: #8bc34a;
-  --matcha-green-300: #aed581;
-  --matcha-green-100: #c5e1a5;
-  --matcha-green-50: #f1f8e9;
-  --matcha-cyan-400: #26a69a;
-  --matcha-lime-400: #cddc39;
-
+  /* Medical Blue Color Palette */
+  --medical-blue-950: #001a4d;
+  --medical-blue-900: #00285c;
+  --medical-blue-700: #0052b3;
+  --medical-blue-500: #1a75ba;
+  --medical-blue-300: #4d9fd9;
+  --medical-blue-100: #99ccef;
+  --medical-blue-50: #e6f3ff;
+  --medical-cyan-400: #00bfd9;
+  --medical-teal-400: #0099b8;
+  
   /* Aliases for compatibility */
-  --medical-blue-950: #2d5016;
-  --medical-blue-900: #33691e;
-  --medical-blue-700: #558b2f;
-  --medical-blue-500: #8bc34a;
-  --medical-cyan-400: #26a69a;
-  --medical-teal-400: #66bb6a;
-  --medical-blue-100: #c5e1a5;
+  --matcha-green-950: #001a4d;
+  --matcha-green-900: #00285c;
+  --matcha-green-700: #0052b3;
+  --matcha-green-500: #1a75ba;
   --medical-white: #ffffff;
-  --medical-text: #1b5e20;
-  --medical-muted: #558b2f;
-  --medical-heading: #1b5e20;
-  --risk-accent: #00695c;
-  --ok: #2e7d32;
-  --warn: #f57f17;
-  --danger: #d32f2f;
-  --shadow-soft: 0 16px 35px rgba(45, 80, 22, 0.18);
+  --medical-text: #001a4d;
+  --medical-muted: #0052b3;
+  --medical-heading: #00285c;
+  --risk-accent: #0099b8;
+  --ok: #0066cc;
+  --warn: #ff9800;
+  --danger: #f44336;
+  --shadow-soft: 0 16px 35px rgba(0, 26, 77, 0.18);
 }
 
 * {
@@ -41,10 +38,10 @@ body {
   font-family: "Poppins", sans-serif;
   color: var(--medical-text);
   background:
-    radial-gradient(circle at 16% 8%, rgba(255, 255, 255, 0.82), transparent 34%),
-    radial-gradient(circle at 85% 16%, rgba(139, 195, 74, 0.22), transparent 40%),
-    radial-gradient(circle at 86% 84%, rgba(85, 139, 47, 0.18), transparent 42%),
-    linear-gradient(135deg, #f1f8e9 0%, #f5f9f0 45%, #eff5e9 100%);
+    radial-gradient(circle at 16% 8%, rgba(255, 255, 255, 0.75), transparent 34%),
+    radial-gradient(circle at 85% 16%, rgba(0, 82, 179, 0.15), transparent 40%),
+    radial-gradient(circle at 86% 84%, rgba(0, 52, 115, 0.12), transparent 42%),
+    linear-gradient(135deg, #e6f3ff 0%, #f0f7ff 45%, #e8f2ff 100%);
   display: grid;
   place-items: center;
   padding: 16px;
@@ -56,8 +53,9 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: url("assets/medical-system-bg.svg") center / cover no-repeat;
-  opacity: 0.3;
+  background: linear-gradient(135deg, rgba(0, 26, 77, 0.8), rgba(26, 117, 186, 0.75)), url("medical-app.jpg") center / cover no-repeat;
+  opacity: 0.5;
+  background-attachment: fixed;
 }
 
 .home-page {
@@ -73,9 +71,10 @@ body::before {
   position: sticky;
   top: 0;
   z-index: 20;
-  backdrop-filter: blur(8px);
-  background: rgba(233, 245, 255, 0.35);
-  border-bottom: 1px solid rgba(21, 101, 176, 0.18);
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 82, 179, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 26, 77, 0.1);
 }
 
 .site-nav {
@@ -94,8 +93,9 @@ body::before {
   gap: 10px;
   font-size: 1rem;
   font-weight: 700;
-  color: var(--medical-blue-950);
+  color: #ffffff;
   text-decoration: none;
+  text-shadow: 0 2px 4px rgba(0, 26, 77, 0.3);
 }
 
 .brand-mark {
@@ -119,12 +119,12 @@ body::before {
 
 .nav-link {
   text-decoration: none;
-  color: var(--medical-blue-900);
+  color: #ffffff;
   font-weight: 600;
   border-radius: 999px;
   padding: 8px 14px;
-  border: 1px solid rgba(85, 139, 47, 0.15);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
   transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
@@ -132,15 +132,16 @@ body::before {
 .nav-link:hover {
   animation: navPulse 400ms ease;
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.22);
-  box-shadow: 0 6px 16px rgba(45, 80, 22, 0.18);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 20px rgba(0, 82, 179, 0.25);
 }
 
 .nav-link.active {
   color: #fff;
   border-color: transparent;
-  background: linear-gradient(135deg, var(--medical-blue-700), var(--medical-cyan-400));
+  background: linear-gradient(135deg, #0052b3, #00bfd9);
   animation: activeGlow 3s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(0, 82, 179, 0.4);
 }
 
 .home-main {
@@ -150,10 +151,10 @@ body::before {
 }
 
 .hero-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(241, 248, 233, 0.28));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.38), rgba(230, 243, 255, 0.32));
   border-radius: 26px;
-  border: 1px solid rgba(85, 139, 47, 0.12);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(0, 82, 179, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 26, 77, 0.15);
   padding: 34px;
   animation: cardLift 620ms ease, floatCard 6s ease-in-out infinite;
   backdrop-filter: blur(14px);
@@ -168,18 +169,18 @@ body::before {
 
 .hero-panel {
   border-radius: 18px;
-  border: 1px solid rgba(85, 139, 47, 0.2);
-  background: linear-gradient(165deg, rgba(51, 105, 30, 0.72), rgba(85, 139, 47, 0.68));
-  color: #f5faf0;
+  border: 1px solid rgba(0, 82, 179, 0.25);
+  background: linear-gradient(165deg, rgba(0, 52, 115, 0.78), rgba(0, 82, 179, 0.72));
+  color: #f0f7ff;
   padding: 18px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(6px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 8px 20px rgba(0, 82, 179, 0.2);
+  backdrop-filter: blur(8px);
   transition: transform 400ms ease, box-shadow 400ms ease;
 }
 
 .hero-panel:hover {
   transform: translateY(-2px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 20px rgba(139, 195, 74, 0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 12px 28px rgba(0, 82, 179, 0.25);
 }
 
 .hero-panel h2 {
@@ -208,16 +209,17 @@ body::before {
 }
 
 .metric {
-  background: rgba(233, 244, 255, 0.72);
-  border: 1px solid rgba(21, 101, 176, 0.2);
+  background: rgba(230, 243, 255, 0.7);
+  border: 1px solid rgba(0, 82, 179, 0.25);
   border-radius: 14px;
   padding: 14px;
+  box-shadow: 0 4px 10px rgba(0, 26, 77, 0.08);
 }
 
 .metric h3 {
   margin: 0 0 6px;
   font-size: 0.98rem;
-  color: var(--medical-blue-950);
+  color: #00285c;
 }
 
 .metric p {
@@ -249,10 +251,11 @@ body::before {
   font-size: 0.95rem;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(135deg, var(--medical-blue-700), var(--medical-cyan-400));
+  background: linear-gradient(135deg, #0052b3, #00bfd9);
   transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 180ms ease, box-shadow 240ms ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 82, 179, 0.3);
 }
 
 .hero-btn::before {
@@ -269,8 +272,8 @@ body::before {
 
 .hero-btn:hover {
   transform: translateY(-3px) scale(1.05);
-  filter: brightness(1.08);
-  box-shadow: 0 12px 28px rgba(139, 195, 74, 0.3);
+  filter: brightness(1.1);
+  box-shadow: 0 12px 32px rgba(0, 82, 179, 0.4);
 }
 
 .hero-btn:hover::before {
@@ -285,8 +288,8 @@ body::before {
 }
 
 .insight-card {
-  background: rgba(255, 255, 255, 0.28);
-  border: 1px solid rgba(85, 139, 47, 0.12);
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(0, 82, 179, 0.15);
   border-radius: 16px;
   padding: 16px;
   transition: transform 280ms ease, box-shadow 280ms ease, background 380ms ease;
@@ -295,8 +298,8 @@ body::before {
 
 .insight-card:hover {
   transform: translateY(-5px) scale(1.02);
-  background: rgba(255, 255, 255, 0.38);
-  box-shadow: 0 16px 32px rgba(45, 80, 22, 0.16), 0 0 20px rgba(139, 195, 74, 0.2);
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 16px 32px rgba(0, 26, 77, 0.15), 0 0 20px rgba(0, 82, 179, 0.2);
   animation: cardShimmer 1s ease;
 }
 
@@ -306,7 +309,7 @@ body::before {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--medical-blue-700);
+  color: #0052b3;
   animation: labelFade 1400ms ease-in-out infinite;
 }
 
@@ -339,8 +342,8 @@ body::before {
 }
 
 .stat-tile {
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.56), rgba(241, 248, 233, 0.52));
-  border: 1px solid rgba(85, 139, 47, 0.2);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.6), rgba(230, 243, 255, 0.55));
+  border: 1px solid rgba(0, 82, 179, 0.2);
   border-radius: 16px;
   padding: 16px;
   backdrop-filter: blur(8px);
@@ -350,8 +353,8 @@ body::before {
 
 .stat-tile:hover {
   transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 20px 40px rgba(139, 195, 74, 0.25);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.68), rgba(241, 248, 233, 0.64));
+  box-shadow: 0 20px 40px rgba(0, 82, 179, 0.25);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.72), rgba(230, 243, 255, 0.68));
 }
 
 .stat-value {
@@ -359,7 +362,7 @@ body::before {
   font-size: 1.9rem;
   line-height: 1;
   font-weight: 800;
-  color: var(--medical-blue-900);
+  color: #00285c;
   margin-bottom: 8px;
 }
 
@@ -372,8 +375,8 @@ body::before {
 .how-card,
 .faq-card {
   margin-top: 16px;
-  background: rgba(255, 255, 255, 0.54);
-  border: 1px solid rgba(85, 139, 47, 0.2);
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(0, 82, 179, 0.2);
   border-radius: 20px;
   padding: 22px;
   backdrop-filter: blur(8px);
@@ -383,8 +386,8 @@ body::before {
 .how-card:hover,
 .faq-card:hover {
   transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.64);
-  box-shadow: 0 12px 28px rgba(139, 195, 74, 0.2);
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 12px 28px rgba(0, 82, 179, 0.2);
 }
 
 .how-card h2,
@@ -401,8 +404,8 @@ body::before {
 
 .step {
   border-radius: 14px;
-  border: 1px solid rgba(85, 139, 47, 0.2);
-  background: rgba(241, 248, 233, 0.46);
+  border: 1px solid rgba(0, 82, 179, 0.2);
+  background: rgba(230, 243, 255, 0.5);
   padding: 14px;
   backdrop-filter: blur(6px);
   transition: all 380ms cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -411,9 +414,9 @@ body::before {
 
 .step:hover {
   transform: translateY(-4px) scale(1.03);
-  background: rgba(241, 248, 233, 0.68);
-  box-shadow: 0 12px 32px rgba(139, 195, 74, 0.2);
-  border-color: rgba(139, 195, 74, 0.4);
+  background: rgba(230, 243, 255, 0.7);
+  box-shadow: 0 12px 32px rgba(0, 82, 179, 0.2);
+  border-color: rgba(0, 82, 179, 0.4);
 }
 
 .step span {
@@ -425,7 +428,7 @@ body::before {
   font-size: 0.86rem;
   font-weight: 700;
   color: #fff;
-  background: linear-gradient(135deg, var(--medical-blue-900), var(--medical-blue-500));
+  background: linear-gradient(135deg, #00285c, #1a75ba);
   animation: stepNumber 600ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
 }
 
@@ -460,9 +463,9 @@ body::before {
 }
 
 .faq-card details {
-  border: 1px solid rgba(85, 139, 47, 0.2);
+  border: 1px solid rgba(0, 82, 179, 0.2);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.44);
+  background: rgba(255, 255, 255, 0.48);
   padding: 11px 12px;
   backdrop-filter: blur(5px);
   cursor: pointer;
@@ -470,14 +473,14 @@ body::before {
 }
 
 .faq-card details:hover {
-  background: rgba(241, 248, 233, 0.56);
-  border-color: rgba(139, 195, 74, 0.35);
-  box-shadow: 0 4px 12px rgba(139, 195, 74, 0.12);
+  background: rgba(230, 243, 255, 0.6);
+  border-color: rgba(0, 82, 179, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 82, 179, 0.15);
 }
 
 .faq-card details[open] {
-  background: rgba(241, 248, 233, 0.62);
-  border-color: rgba(139, 195, 74, 0.4);
+  background: rgba(230, 243, 255, 0.68);
+  border-color: rgba(0, 82, 179, 0.4);
   animation: detailsOpen 300ms ease;
 }
 
@@ -499,7 +502,7 @@ body::before {
 .faq-card summary {
   cursor: pointer;
   font-weight: 600;
-  color: var(--medical-blue-950);
+  color: #00285c;
   user-select: none;
   transition: color 300ms ease;
   display: flex;
@@ -508,11 +511,11 @@ body::before {
 }
 
 .faq-card details[open] summary {
-  color: var(--medical-blue-700);
+  color: #0052b3;
 }
 
 .faq-card summary:hover {
-  color: var(--medical-blue-700);
+  color: #0052b3;
 }
 
 .faq-card details summary::before {
@@ -534,8 +537,8 @@ body::before {
 
 .dangers-card {
   margin-top: 16px;
-  background: rgba(255, 255, 255, 0.32);
-  border: 1px solid rgba(191, 47, 55, 0.18);
+  background: rgba(255, 255, 255, 0.36);
+  border: 1px solid rgba(244, 67, 54, 0.2);
   border-radius: 20px;
   padding: 22px;
   backdrop-filter: blur(10px);
@@ -544,9 +547,9 @@ body::before {
 }
 
 .dangers-card:hover {
-  background: rgba(255, 255, 255, 0.42);
-  border-color: rgba(191, 47, 55, 0.28);
-  box-shadow: 0 12px 32px rgba(191, 47, 55, 0.15);
+  background: rgba(255, 255, 255, 0.46);
+  border-color: rgba(244, 67, 54, 0.3);
+  box-shadow: 0 12px 32px rgba(244, 67, 54, 0.15);
   transform: translateY(-2px);
 }
 
@@ -564,7 +567,7 @@ body::before {
 .dangers-card h2 {
   margin: 8px 0 14px;
   font-size: 1.25rem;
-  color: var(--medical-heading);
+  color: #00285c;
 }
 
 .dangers-grid {
@@ -629,7 +632,7 @@ body::before {
 .danger-item h4 {
   margin: 0 0 6px;
   font-size: 0.95rem;
-  color: #bf2f37;
+  color: #f44336;
   font-weight: 700;
 }
 
@@ -642,8 +645,8 @@ body::before {
 
 .system-card {
   margin-top: 16px;
-  background: rgba(255, 255, 255, 0.32);
-  border: 1px solid rgba(139, 195, 74, 0.16);
+  background: rgba(255, 255, 255, 0.36);
+  border: 1px solid rgba(0, 82, 179, 0.18);
   border-radius: 20px;
   padding: 22px;
   backdrop-filter: blur(10px);
@@ -652,9 +655,9 @@ body::before {
 }
 
 .system-card:hover {
-  background: rgba(255, 255, 255, 0.42);
-  border-color: rgba(139, 195, 74, 0.28);
-  box-shadow: 0 12px 32px rgba(139, 195, 74, 0.15);
+  background: rgba(255, 255, 255, 0.46);
+  border-color: rgba(0, 82, 179, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 82, 179, 0.15);
   transform: translateY(-2px);
 }
 
@@ -672,7 +675,7 @@ body::before {
 .system-card h2 {
   margin: 8px 0 14px;
   font-size: 1.25rem;
-  color: var(--medical-heading);
+  color: #00285c;
 }
 
 .system-content {
@@ -729,7 +732,7 @@ body::before {
 .system-section h3 {
   margin: 0 0 6px;
   font-size: 0.98rem;
-  color: var(--medical-blue-700);
+  color: #0052b3;
   font-weight: 700;
 }
 
@@ -761,8 +764,8 @@ body::before {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  background: linear-gradient(135deg, rgba(139, 195, 74, 0.28), rgba(38, 166, 154, 0.22));
-  border: 1px solid rgba(139, 195, 74, 0.2);
+  background: linear-gradient(135deg, rgba(0, 82, 179, 0.3), rgba(0, 191, 217, 0.25));
+  border: 1px solid rgba(0, 82, 179, 0.25);
   border-radius: 18px;
   padding: 20px;
   backdrop-filter: blur(10px);
@@ -782,8 +785,8 @@ body::before {
 
 .final-install:hover {
   transform: translateY(-4px) scale(1.02);
-  border-color: rgba(139, 195, 74, 0.4);
-  box-shadow: 0 16px 40px rgba(139, 195, 74, 0.25);
+  border-color: rgba(0, 82, 179, 0.4);
+  box-shadow: 0 16px 40px rgba(0, 82, 179, 0.25);
 }
 
 @keyframes glossShine {
@@ -802,13 +805,13 @@ body::before {
   margin: 0 0 8px;
   font-size: 1.08rem;
   font-weight: 700;
-  color: var(--medical-blue-700);
+  color: #0052b3;
 }
 
 .install-desc {
   margin: 0 0 14px;
   font-size: 0.92rem;
-  color: var(--medical-muted);
+  color: #0052b3;
 }
 
 .install-action-btn {
@@ -845,15 +848,15 @@ body::before {
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(244, 250, 242, 0.26) 100%);
-  border: 1px solid rgba(85, 139, 47, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(230, 243, 255, 0.32) 100%);
+  border: 1px solid rgba(0, 82, 179, 0.12);
   border-radius: 24px;
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 16px 35px rgba(0, 26, 77, 0.12);
   padding: 24px 20px;
   animation: cardLift 600ms ease, floatCard 8s ease-in-out infinite;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
 }
 
 .card::before {
@@ -864,7 +867,7 @@ body::before {
   width: 170px;
   height: 170px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(139, 195, 74, 0.32) 0%, rgba(139, 195, 74, 0) 72%);
+  background: radial-gradient(circle, rgba(0, 82, 179, 0.25) 0%, rgba(0, 82, 179, 0) 72%);
   pointer-events: none;
 }
 
@@ -908,30 +911,31 @@ body::before {
   width: 38px;
   height: 38px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--medical-blue-900), var(--medical-blue-500));
+  background: linear-gradient(135deg, #00285c, #0052b3);
   color: #fff;
   display: grid;
   place-items: center;
   font-size: 1.2rem;
   font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 82, 179, 0.25);
 }
 
 .app-name {
   margin: 0;
   font-size: 0.88rem;
   font-weight: 700;
-  color: var(--medical-blue-950);
+  color: #00285c;
 }
 
 .app-tag {
   margin: 0;
   font-size: 0.75rem;
-  color: var(--medical-muted);
+  color: #0052b3;
 }
 
 .eyebrow {
   margin: 0;
-  color: var(--medical-blue-700);
+  color: #0052b3;
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -942,13 +946,13 @@ h1 {
   margin: 10px 0 6px;
   font-size: 1.35rem;
   line-height: 1.3;
-  color: var(--medical-heading);
+  color: #00285c;
   font-weight: 800;
 }
 
 .subtitle {
   margin: 0 0 18px;
-  color: var(--medical-muted);
+  color: #0052b3;
   font-size: 0.92rem;
 }
 
@@ -962,9 +966,9 @@ h1 {
 .info-strip span {
   font-size: 0.74rem;
   font-weight: 600;
-  border: 1px solid rgba(85, 139, 47, 0.25);
-  background: rgba(241, 248, 233, 0.38);
-  color: var(--medical-blue-900);
+  border: 1px solid rgba(0, 82, 179, 0.3);
+  background: rgba(230, 243, 255, 0.45);
+  color: #00285c;
   border-radius: 999px;
   padding: 5px 10px;
   backdrop-filter: blur(5px);
@@ -985,14 +989,14 @@ h1 {
   margin: 0 0 16px;
   padding: 12px;
   border-radius: 12px;
-  border: 1px dashed rgba(10, 68, 120, 0.3);
-  background: rgba(233, 244, 255, 0.65);
+  border: 1px dashed rgba(0, 82, 179, 0.35);
+  background: rgba(230, 243, 255, 0.7);
 }
 
 .install-app p {
   margin: 0 0 8px;
   font-size: 0.86rem;
-  color: var(--medical-blue-900);
+  color: #00285c;
   font-weight: 500;
 }
 
@@ -1015,12 +1019,12 @@ label {
 input,
 select {
   width: 100%;
-  border: 2px solid rgba(85, 139, 47, 0.25);
-  background: rgba(255, 255, 255, 0.58);
+  border: 2px solid rgba(0, 82, 179, 0.3);
+  background: rgba(255, 255, 255, 0.65);
   border-radius: 12px;
   padding: 11px 12px;
   font-size: 0.92rem;
-  color: var(--medical-text);
+  color: #001a4d;
   outline: none;
   transition: border-color 300ms ease, box-shadow 300ms ease, background 300ms ease;
   backdrop-filter: blur(6px);
@@ -1028,24 +1032,24 @@ select {
 
 input:focus,
 select:focus {
-  border-color: var(--medical-blue-500);
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 0 0 4px rgba(139, 195, 74, 0.25), inset 0 0 0 1px rgba(85, 139, 47, 0.1);
+  border-color: #1a75ba;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 4px rgba(0, 82, 179, 0.2), inset 0 0 0 1px rgba(0, 52, 115, 0.1);
   animation: inputFocus 400ms ease;
 }
 
 input:hover,
 select:hover {
-  border-color: rgba(139, 195, 74, 0.4);
-  background: rgba(255, 255, 255, 0.68);
+  border-color: rgba(0, 82, 179, 0.5);
+  background: rgba(255, 255, 255, 0.75);
 }
 
 @keyframes inputFocus {
   0% {
-    box-shadow: 0 0 0 0 rgba(139, 195, 74, 0.25);
+    box-shadow: 0 0 0 0 rgba(0, 82, 179, 0.2);
   }
   100% {
-    box-shadow: 0 0 0 4px rgba(139, 195, 74, 0.25), inset 0 0 0 1px rgba(85, 139, 47, 0.1);
+    box-shadow: 0 0 0 4px rgba(0, 82, 179, 0.2), inset 0 0 0 1px rgba(0, 52, 115, 0.1);
   }
 }
 
@@ -1056,11 +1060,11 @@ button {
   font-size: 0.95rem;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(135deg, var(--medical-blue-700), var(--medical-cyan-400));
+  background: linear-gradient(135deg, #0052b3, #00bfd9);
   cursor: pointer;
   margin-top: 4px;
   transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 180ms ease, box-shadow 240ms ease;
-  box-shadow: 0 10px 18px rgba(45, 80, 22, 0.22);
+  box-shadow: 0 10px 20px rgba(0, 82, 179, 0.25);
   position: relative;
   overflow: hidden;
 }
@@ -1090,8 +1094,8 @@ button:disabled {
 
 button:hover {
   transform: translateY(-3px) scale(1.04);
-  filter: brightness(1.08);
-  box-shadow: 0 16px 28px rgba(139, 195, 74, 0.3);
+  filter: brightness(1.1);
+  box-shadow: 0 16px 32px rgba(0, 82, 179, 0.35);
 }
 
 button:active {
@@ -1099,8 +1103,8 @@ button:active {
 }
 
 .result-block {
-  background: rgba(233, 244, 255, 0.45);
-  border-left: 5px solid var(--risk-accent);
+  background: rgba(230, 243, 255, 0.5);
+  border-left: 5px solid #00bfd9;
   border-radius: 16px;
   padding: 14px 16px;
   margin: 10px 0 16px;
@@ -1139,7 +1143,7 @@ button:active {
 
 .result-block p {
   margin: 0;
-  color: #084b84;
+  color: #00285c;
   font-weight: 600;
 }
 
@@ -1147,7 +1151,7 @@ button:active {
   margin-top: 10px;
   width: 100%;
   height: 9px;
-  background: rgba(11, 60, 110, 0.16);
+  background: rgba(0, 52, 115, 0.16);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -1156,7 +1160,7 @@ button:active {
   width: 0%;
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, #11a77c 0%, #1d87d9 100%);
+  background: linear-gradient(90deg, #0099b8 0%, #1a75ba 100%);
   transition: width 400ms ease;
 }
 
@@ -1195,6 +1199,7 @@ button:active {
 .recommendations h3 {
   margin: 0 0 10px;
   font-size: 1rem;
+  color: #00285c;
 }
 
 .recommendations ul {
