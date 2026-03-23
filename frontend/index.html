@@ -26,37 +26,146 @@
   </header>
 
   <main class="home-main">
-    <section class="hero-card">
-      <p class="eyebrow">Digital Preventive Healthcare</p>
-      <h1>Early Obesity Risk Intelligence for Adolescents</h1>
-      <p class="subtitle home-subtitle">
-        ObesiCare is an AI-powered medical web application that helps identify early obesity risk patterns
-        using lifestyle and health indicators, then provides clear recommendations for healthier outcomes.
-      </p>
+    <section class="hero-card reveal-up">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">Digital Preventive Healthcare</p>
+          <h1>Understand Obesity Early. Support Adolescents Better.</h1>
+          <p class="subtitle home-subtitle">
+            ObesiCare helps families and students identify early obesity risk patterns using health and
+            lifestyle indicators, then turns the prediction into practical, easy-to-follow guidance.
+          </p>
 
-      <div class="hero-metrics" role="list" aria-label="App highlights">
-        <article class="metric" role="listitem">
-          <h3>AI Prediction</h3>
-          <p>Deep-learning risk screening in seconds.</p>
+          <div class="hero-actions">
+            <a class="hero-btn" href="login.html">Start Assessment</a>
+            <a class="secondary-btn" href="login.html">Go to Login</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel" aria-label="Why early action matters">
+          <h2>Why this matters</h2>
+          <ul>
+            <li>Early detection improves long-term outcomes.</li>
+            <li>Adolescent habits strongly influence adult health.</li>
+            <li>Small changes now can prevent bigger risks later.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="insight-grid reveal-up" aria-label="Key insights">
+      <article class="insight-card">
+        <p class="insight-label">What is obesity?</p>
+        <h3>More than body weight</h3>
+        <p>
+          Obesity is a health condition with excess body fat that may increase the risk of diabetes,
+          blood pressure issues, heart disease, and reduced physical fitness.
+        </p>
+      </article>
+
+      <article class="insight-card">
+        <p class="insight-label">What is adolescent obesity?</p>
+        <h3>Growth stage with special risk</h3>
+        <p>
+          During teenage years, rapid physical and hormonal changes make nutrition, sleep, physical
+          activity, and screen-time habits especially important for lifelong health.
+        </p>
+      </article>
+
+      <article class="insight-card">
+        <p class="insight-label">How ObesiCare helps</p>
+        <h3>Predict, explain, guide</h3>
+        <p>
+          ObesiCare analyzes your responses, predicts obesity risk level, and gives structured
+          recommendations that can be followed at home and discussed with healthcare professionals.
+        </p>
+      </article>
+    </section>
+
+    <section class="stats-row reveal-up" aria-label="Platform highlights">
+      <article class="stat-tile">
+        <span class="stat-value" data-target="16">0</span>
+        <p>Health and lifestyle indicators evaluated</p>
+      </article>
+      <article class="stat-tile">
+        <span class="stat-value" data-target="7">0</span>
+        <p>Risk classes learned by the AI model</p>
+      </article>
+      <article class="stat-tile">
+        <span class="stat-value" data-target="3">0</span>
+        <p>Simple flow: Login, Form, Result</p>
+      </article>
+    </section>
+
+    <section class="how-card reveal-up" aria-label="How ObesiCare works">
+      <p class="eyebrow">How It Works</p>
+      <h2>From Questionnaire to Action Plan</h2>
+      <div class="steps-grid" role="list">
+        <article class="step" role="listitem">
+          <span>1</span>
+          <h3>Login Securely</h3>
+          <p>Enter basic profile details to begin the screening flow.</p>
         </article>
-        <article class="metric" role="listitem">
-          <h3>Clinical UX</h3>
-          <p>Designed like a modern medical dashboard.</p>
+        <article class="step" role="listitem">
+          <span>2</span>
+          <h3>Complete Assessment</h3>
+          <p>Provide lifestyle and health inputs used by the prediction model.</p>
         </article>
-        <article class="metric" role="listitem">
-          <h3>Personal Guidance</h3>
-          <p>Actionable recommendations for each result.</p>
+        <article class="step" role="listitem">
+          <span>3</span>
+          <h3>Receive Guidance</h3>
+          <p>View risk level, confidence, and practical recommendation points.</p>
         </article>
       </div>
+    </section>
 
-      <div class="hero-actions">
-        <a class="hero-btn" href="login.html">Start Assessment</a>
-        <a class="secondary-btn" href="login.html">Go to Login</a>
-      </div>
+    <section class="faq-card reveal-up" aria-label="Common questions">
+      <p class="eyebrow">Common Questions</p>
+      <h2>Interactive FAQ</h2>
+      <details>
+        <summary>Is ObesiCare a replacement for doctors?</summary>
+        <p>No. ObesiCare is a screening and support tool, not a clinical diagnosis.</p>
+      </details>
+      <details>
+        <summary>Can this help with prevention?</summary>
+        <p>Yes. It highlights early risk signals and encourages healthy daily routines before severe issues develop.</p>
+      </details>
+      <details>
+        <summary>Who should use this app?</summary>
+        <p>Adolescents, parents, teachers, and care providers who want structured early risk awareness.</p>
+      </details>
     </section>
   </main>
 
   <script>
+    const revealItems = document.querySelectorAll('.reveal-up');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+
+    const statValues = document.querySelectorAll('.stat-value');
+    statValues.forEach((el) => {
+      const target = Number(el.dataset.target || 0);
+      let current = 0;
+      const step = Math.max(1, Math.ceil(target / 24));
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) {
+          el.textContent = String(target);
+          clearInterval(timer);
+          return;
+        }
+        el.textContent = String(current);
+      }, 32);
+    });
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('service-worker.js')
         .then((reg) => console.log('Service Worker registered:', reg))
