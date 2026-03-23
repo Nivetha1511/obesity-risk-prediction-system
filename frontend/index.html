@@ -40,6 +40,11 @@
             <a class="hero-btn" href="login.html">Start Assessment</a>
             <a class="secondary-btn" href="login.html">Go to Login</a>
           </div>
+
+          <div id="installAppSection" class="install-app home-install" hidden>
+            <p>Install ObesiCare for faster access from your device home screen.</p>
+            <button type="button" id="installAppBtn">Install App</button>
+          </div>
         </div>
 
         <aside class="hero-panel" aria-label="Why early action matters">
@@ -138,6 +143,8 @@
   </main>
 
   <script>
+    let deferredInstallPrompt = null;
+
     const revealItems = document.querySelectorAll('.reveal-up');
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -164,6 +171,42 @@
         }
         el.textContent = String(current);
       }, 32);
+    });
+
+    const installSection = document.getElementById('installAppSection');
+    const installButton = document.getElementById('installAppBtn');
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      if (installSection) {
+        installSection.hidden = false;
+      }
+    });
+
+    if (installButton) {
+      installButton.addEventListener('click', async () => {
+        if (!deferredInstallPrompt) {
+          return;
+        }
+
+        deferredInstallPrompt.prompt();
+        try {
+          await deferredInstallPrompt.userChoice;
+        } finally {
+          deferredInstallPrompt = null;
+          if (installSection) {
+            installSection.hidden = true;
+          }
+        }
+      });
+    }
+
+    window.addEventListener('appinstalled', () => {
+      deferredInstallPrompt = null;
+      if (installSection) {
+        installSection.hidden = true;
+      }
     });
 
     if ('serviceWorker' in navigator) {
