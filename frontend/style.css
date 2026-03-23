@@ -1,20 +1,32 @@
 :root {
-  --medical-blue-950: #082742;
-  --medical-blue-900: #0b3c6e;
-  --medical-blue-700: #1565b0;
-  --medical-blue-500: #1d87d9;
-  --medical-cyan-400: #25c8e8;
-  --medical-teal-400: #2bcf9f;
-  --medical-blue-100: #e9f4ff;
+  /* Matcha Green Color Palette */
+  --matcha-green-950: #2d5016;
+  --matcha-green-900: #33691e;
+  --matcha-green-700: #558b2f;
+  --matcha-green-500: #8bc34a;
+  --matcha-green-300: #aed581;
+  --matcha-green-100: #c5e1a5;
+  --matcha-green-50: #f1f8e9;
+  --matcha-cyan-400: #26a69a;
+  --matcha-lime-400: #cddc39;
+
+  /* Aliases for compatibility */
+  --medical-blue-950: #2d5016;
+  --medical-blue-900: #33691e;
+  --medical-blue-700: #558b2f;
+  --medical-blue-500: #8bc34a;
+  --medical-cyan-400: #26a69a;
+  --medical-teal-400: #66bb6a;
+  --medical-blue-100: #c5e1a5;
   --medical-white: #ffffff;
-  --medical-text: #0a1f35;
-  --medical-muted: #3d5a72;
-  --medical-heading: #042d4a;
-  --risk-accent: #0076d6;
-  --ok: #1b8a5a;
-  --warn: #d68b00;
-  --danger: #bf2f37;
-  --shadow-soft: 0 16px 35px rgba(9, 53, 94, 0.18);
+  --medical-text: #1b5e20;
+  --medical-muted: #558b2f;
+  --medical-heading: #1b5e20;
+  --risk-accent: #00695c;
+  --ok: #2e7d32;
+  --warn: #f57f17;
+  --danger: #d32f2f;
+  --shadow-soft: 0 16px 35px rgba(45, 80, 22, 0.18);
 }
 
 * {
@@ -30,9 +42,9 @@ body {
   color: var(--medical-text);
   background:
     radial-gradient(circle at 16% 8%, rgba(255, 255, 255, 0.82), transparent 34%),
-    radial-gradient(circle at 85% 16%, rgba(37, 200, 232, 0.26), transparent 40%),
-    radial-gradient(circle at 86% 84%, rgba(22, 107, 182, 0.2), transparent 42%),
-    linear-gradient(135deg, #d7ebff 0%, #f2f9ff 45%, #dcf0ff 100%);
+    radial-gradient(circle at 85% 16%, rgba(139, 195, 74, 0.22), transparent 40%),
+    radial-gradient(circle at 86% 84%, rgba(85, 139, 47, 0.18), transparent 42%),
+    linear-gradient(135deg, #f1f8e9 0%, #f5f9f0 45%, #eff5e9 100%);
   display: grid;
   place-items: center;
   padding: 16px;
@@ -111,22 +123,24 @@ body::before {
   font-weight: 600;
   border-radius: 999px;
   padding: 8px 14px;
-  border: 1px solid rgba(21, 101, 176, 0.15);
+  border: 1px solid rgba(85, 139, 47, 0.15);
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 
 .nav-link:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 6px 14px rgba(9, 53, 94, 0.14);
+  animation: navPulse 400ms ease;
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 6px 16px rgba(45, 80, 22, 0.18);
 }
 
 .nav-link.active {
   color: #fff;
   border-color: transparent;
-  background: linear-gradient(135deg, var(--medical-blue-900), var(--medical-cyan-400));
+  background: linear-gradient(135deg, var(--medical-blue-700), var(--medical-cyan-400));
+  animation: activeGlow 3s ease-in-out infinite;
 }
 
 .home-main {
@@ -136,12 +150,12 @@ body::before {
 }
 
 .hero-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(242, 249, 255, 0.28));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(241, 248, 233, 0.28));
   border-radius: 26px;
-  border: 1px solid rgba(21, 101, 176, 0.12);
+  border: 1px solid rgba(85, 139, 47, 0.12);
   box-shadow: var(--shadow-soft);
   padding: 34px;
-  animation: cardLift 620ms ease;
+  animation: cardLift 620ms ease, floatCard 6s ease-in-out infinite;
   backdrop-filter: blur(14px);
 }
 
@@ -154,12 +168,18 @@ body::before {
 
 .hero-panel {
   border-radius: 18px;
-  border: 1px solid rgba(21, 101, 176, 0.2);
-  background: linear-gradient(165deg, rgba(11, 60, 110, 0.72), rgba(16, 96, 166, 0.68));
-  color: #f2f8ff;
+  border: 1px solid rgba(85, 139, 47, 0.2);
+  background: linear-gradient(165deg, rgba(51, 105, 30, 0.72), rgba(85, 139, 47, 0.68));
+  color: #f5faf0;
   padding: 18px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(6px);
+  transition: transform 400ms ease, box-shadow 400ms ease;
+}
+
+.hero-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 20px rgba(139, 195, 74, 0.2);
 }
 
 .hero-panel h2 {
@@ -230,12 +250,31 @@ body::before {
   font-weight: 600;
   color: #fff;
   background: linear-gradient(135deg, var(--medical-blue-700), var(--medical-cyan-400));
-  transition: transform 180ms ease, filter 180ms ease;
+  transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 180ms ease, box-shadow 240ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 400ms ease;
+  z-index: -1;
 }
 
 .hero-btn:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.03);
+  transform: translateY(-3px) scale(1.05);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 28px rgba(139, 195, 74, 0.3);
+}
+
+.hero-btn:hover::before {
+  left: 100%;
 }
 
 .insight-grid {
@@ -247,16 +286,18 @@ body::before {
 
 .insight-card {
   background: rgba(255, 255, 255, 0.28);
-  border: 1px solid rgba(21, 101, 176, 0.12);
+  border: 1px solid rgba(85, 139, 47, 0.12);
   border-radius: 16px;
   padding: 16px;
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  transition: transform 280ms ease, box-shadow 280ms ease, background 380ms ease;
   backdrop-filter: blur(12px);
 }
 
 .insight-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px rgba(9, 53, 94, 0.14);
+  transform: translateY(-5px) scale(1.02);
+  background: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 16px 32px rgba(45, 80, 22, 0.16), 0 0 20px rgba(139, 195, 74, 0.2);
+  animation: cardShimmer 1s ease;
 }
 
 .insight-label {
@@ -266,6 +307,16 @@ body::before {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--medical-blue-700);
+  animation: labelFade 1400ms ease-in-out infinite;
+}
+
+@keyframes labelFade {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .insight-card h3 {
@@ -288,11 +339,19 @@ body::before {
 }
 
 .stat-tile {
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.56), rgba(236, 247, 255, 0.52));
-  border: 1px solid rgba(21, 101, 176, 0.2);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.56), rgba(241, 248, 233, 0.52));
+  border: 1px solid rgba(85, 139, 47, 0.2);
   border-radius: 16px;
   padding: 16px;
   backdrop-filter: blur(8px);
+  transition: all 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.stat-tile:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(139, 195, 74, 0.25);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.68), rgba(241, 248, 233, 0.64));
 }
 
 .stat-value {
@@ -314,10 +373,18 @@ body::before {
 .faq-card {
   margin-top: 16px;
   background: rgba(255, 255, 255, 0.54);
-  border: 1px solid rgba(21, 101, 176, 0.2);
+  border: 1px solid rgba(85, 139, 47, 0.2);
   border-radius: 20px;
   padding: 22px;
   backdrop-filter: blur(8px);
+  transition: all 400ms ease;
+}
+
+.how-card:hover,
+.faq-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: 0 12px 28px rgba(139, 195, 74, 0.2);
 }
 
 .how-card h2,
@@ -334,10 +401,19 @@ body::before {
 
 .step {
   border-radius: 14px;
-  border: 1px solid rgba(21, 101, 176, 0.2);
-  background: rgba(233, 244, 255, 0.46);
+  border: 1px solid rgba(85, 139, 47, 0.2);
+  background: rgba(241, 248, 233, 0.46);
   padding: 14px;
   backdrop-filter: blur(6px);
+  transition: all 380ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.step:hover {
+  transform: translateY(-4px) scale(1.03);
+  background: rgba(241, 248, 233, 0.68);
+  box-shadow: 0 12px 32px rgba(139, 195, 74, 0.2);
+  border-color: rgba(139, 195, 74, 0.4);
 }
 
 .step span {
@@ -350,6 +426,26 @@ body::before {
   font-weight: 700;
   color: #fff;
   background: linear-gradient(135deg, var(--medical-blue-900), var(--medical-blue-500));
+  animation: stepNumber 600ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.step:nth-child(2) span {
+  animation-delay: 100ms;
+}
+
+.step:nth-child(3) span {
+  animation-delay: 200ms;
+}
+
+@keyframes stepNumber {
+  from {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
 }
 
 .step h3 {
@@ -364,11 +460,36 @@ body::before {
 }
 
 .faq-card details {
-  border: 1px solid rgba(21, 101, 176, 0.2);
+  border: 1px solid rgba(85, 139, 47, 0.2);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.44);
   padding: 11px 12px;
   backdrop-filter: blur(5px);
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.faq-card details:hover {
+  background: rgba(241, 248, 233, 0.56);
+  border-color: rgba(139, 195, 74, 0.35);
+  box-shadow: 0 4px 12px rgba(139, 195, 74, 0.12);
+}
+
+.faq-card details[open] {
+  background: rgba(241, 248, 233, 0.62);
+  border-color: rgba(139, 195, 74, 0.4);
+  animation: detailsOpen 300ms ease;
+}
+
+@keyframes detailsOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .faq-card details + details {
@@ -379,6 +500,30 @@ body::before {
   cursor: pointer;
   font-weight: 600;
   color: var(--medical-blue-950);
+  user-select: none;
+  transition: color 300ms ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.faq-card details[open] summary {
+  color: var(--medical-blue-700);
+}
+
+.faq-card summary:hover {
+  color: var(--medical-blue-700);
+}
+
+.faq-card details summary::before {
+  content: "▶";
+  font-size: 0.75rem;
+  transition: transform 300ms ease;
+  display: inline-block;
+}
+
+.faq-card details[open] summary::before {
+  transform: rotate(90deg);
 }
 
 .faq-card details p {
@@ -394,6 +539,26 @@ body::before {
   border-radius: 20px;
   padding: 22px;
   backdrop-filter: blur(10px);
+  transition: all 400ms ease;
+  animation: dangersEntry 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dangers-card:hover {
+  background: rgba(255, 255, 255, 0.42);
+  border-color: rgba(191, 47, 55, 0.28);
+  box-shadow: 0 12px 32px rgba(191, 47, 55, 0.15);
+  transform: translateY(-2px);
+}
+
+@keyframes dangersEntry {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .dangers-card h2 {
@@ -414,6 +579,51 @@ body::before {
   background: rgba(255, 233, 235, 0.38);
   padding: 13px;
   backdrop-filter: blur(6px);
+  transition: all 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  animation: itemSlide 600ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.danger-item:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.danger-item:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.danger-item:nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.danger-item:nth-child(4) {
+  animation-delay: 240ms;
+}
+
+.danger-item:nth-child(5) {
+  animation-delay: 320ms;
+}
+
+.danger-item:nth-child(6) {
+  animation-delay: 400ms;
+}
+
+.danger-item:hover {
+  transform: translateY(-4px) scale(1.04);
+  background: rgba(255, 233, 235, 0.58);
+  border-color: rgba(191, 47, 55, 0.4);
+  box-shadow: 0 10px 24px rgba(191, 47, 55, 0.18);
+}
+
+@keyframes itemSlide {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .danger-item h4 {
@@ -433,10 +643,30 @@ body::before {
 .system-card {
   margin-top: 16px;
   background: rgba(255, 255, 255, 0.32);
-  border: 1px solid rgba(29, 135, 217, 0.16);
+  border: 1px solid rgba(139, 195, 74, 0.16);
   border-radius: 20px;
   padding: 22px;
   backdrop-filter: blur(10px);
+  transition: all 400ms ease;
+  animation: systemEntry 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.system-card:hover {
+  background: rgba(255, 255, 255, 0.42);
+  border-color: rgba(139, 195, 74, 0.28);
+  box-shadow: 0 12px 32px rgba(139, 195, 74, 0.15);
+  transform: translateY(-2px);
+}
+
+@keyframes systemEntry {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .system-card h2 {
@@ -453,10 +683,47 @@ body::before {
 
 .system-section {
   border-radius: 12px;
-  border: 1px solid rgba(21, 101, 176, 0.16);
-  background: rgba(233, 244, 255, 0.3);
+  border: 1px solid rgba(85, 139, 47, 0.16);
+  background: rgba(241, 248, 233, 0.3);
   padding: 12px;
   backdrop-filter: blur(6px);
+  transition: all 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  animation: sectionFade 600ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+.system-section:nth-child(1) {
+  animation-delay: 100ms;
+}
+
+.system-section:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.system-section:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+.system-section:nth-child(4) {
+  animation-delay: 400ms;
+}
+
+.system-section:hover {
+  transform: translateY(-3px) scale(1.03);
+  background: rgba(241, 248, 233, 0.5);
+  border-color: rgba(139, 195, 74, 0.3);
+  box-shadow: 0 8px 20px rgba(139, 195, 74, 0.15);
+}
+
+@keyframes sectionFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .system-section h3 {
@@ -476,17 +743,59 @@ body::before {
 .install-section {
   margin-top: 18px;
   text-align: center;
+  animation: installSlide 700ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes installSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .final-install {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  background: linear-gradient(135deg, rgba(29, 135, 217, 0.28), rgba(37, 200, 232, 0.22));
-  border: 1px solid rgba(29, 135, 217, 0.2);
+  background: linear-gradient(135deg, rgba(139, 195, 74, 0.28), rgba(38, 166, 154, 0.22));
+  border: 1px solid rgba(139, 195, 74, 0.2);
   border-radius: 18px;
   padding: 20px;
   backdrop-filter: blur(10px);
+  transition: all 400ms ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.final-install::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: glossShine 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.final-install:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(139, 195, 74, 0.4);
+  box-shadow: 0 16px 40px rgba(139, 195, 74, 0.25);
+}
+
+@keyframes glossShine {
+  0% {
+    transform: translateX(-100%) translateY(-100%);
+  }
+  50% {
+    transform: translateX(400%) translateY(400%);
+  }
+  100% {
+    transform: translateX(600%) translateY(600%);
+  }
 }
 
 .install-title {
@@ -511,12 +820,24 @@ body::before {
 .reveal-up {
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity 520ms ease, transform 520ms ease;
+  transition: opacity 620ms cubic-bezier(0.34, 1.56, 0.64, 1), transform 620ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .reveal-up.show {
   opacity: 1;
   transform: translateY(0);
+  animation: slideInUp 620ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .phone-shell {
@@ -524,12 +845,12 @@ body::before {
 }
 
 .card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(244, 250, 255, 0.26) 100%);
-  border: 1px solid rgba(21, 101, 176, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(244, 250, 242, 0.26) 100%);
+  border: 1px solid rgba(85, 139, 47, 0.1);
   border-radius: 24px;
   box-shadow: var(--shadow-soft);
   padding: 24px 20px;
-  animation: cardLift 600ms ease;
+  animation: cardLift 600ms ease, floatCard 8s ease-in-out infinite;
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(12px);
@@ -543,8 +864,37 @@ body::before {
   width: 170px;
   height: 170px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(29, 135, 217, 0.32) 0%, rgba(29, 135, 217, 0) 72%);
+  background: radial-gradient(circle, rgba(139, 195, 74, 0.32) 0%, rgba(139, 195, 74, 0) 72%);
   pointer-events: none;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  opacity: 0;
+  transition: opacity 600ms ease;
+  pointer-events: none;
+}
+
+.card:hover::after {
+  animation: shimmer 1.5s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
 }
 
 .app-head {
@@ -612,12 +962,23 @@ h1 {
 .info-strip span {
   font-size: 0.74rem;
   font-weight: 600;
-  border: 1px solid rgba(21, 101, 176, 0.25);
-  background: rgba(233, 244, 255, 0.38);
+  border: 1px solid rgba(85, 139, 47, 0.25);
+  background: rgba(241, 248, 233, 0.38);
   color: var(--medical-blue-900);
   border-radius: 999px;
   padding: 5px 10px;
   backdrop-filter: blur(5px);
+  display: inline-flex;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .install-app {
@@ -654,21 +1015,38 @@ label {
 input,
 select {
   width: 100%;
-  border: 1px solid rgba(10, 68, 120, 0.25);
+  border: 2px solid rgba(85, 139, 47, 0.25);
   background: rgba(255, 255, 255, 0.58);
   border-radius: 12px;
   padding: 11px 12px;
   font-size: 0.92rem;
   color: var(--medical-text);
   outline: none;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  transition: border-color 300ms ease, box-shadow 300ms ease, background 300ms ease;
   backdrop-filter: blur(6px);
 }
 
 input:focus,
 select:focus {
   border-color: var(--medical-blue-500);
-  box-shadow: 0 0 0 3px rgba(29, 135, 217, 0.2);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 0 0 4px rgba(139, 195, 74, 0.25), inset 0 0 0 1px rgba(85, 139, 47, 0.1);
+  animation: inputFocus 400ms ease;
+}
+
+input:hover,
+select:hover {
+  border-color: rgba(139, 195, 74, 0.4);
+  background: rgba(255, 255, 255, 0.68);
+}
+
+@keyframes inputFocus {
+  0% {
+    box-shadow: 0 0 0 0 rgba(139, 195, 74, 0.25);
+  }
+  100% {
+    box-shadow: 0 0 0 4px rgba(139, 195, 74, 0.25), inset 0 0 0 1px rgba(85, 139, 47, 0.1);
+  }
 }
 
 button {
@@ -681,8 +1059,28 @@ button {
   background: linear-gradient(135deg, var(--medical-blue-700), var(--medical-cyan-400));
   cursor: pointer;
   margin-top: 4px;
-  transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
-  box-shadow: 0 10px 18px rgba(13, 101, 176, 0.22);
+  transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), filter 180ms ease, box-shadow 240ms ease;
+  box-shadow: 0 10px 18px rgba(45, 80, 22, 0.22);
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  transition: width 400ms, height 400ms;
+}
+
+button:hover::after {
+  width: 300px;
+  height: 300px;
 }
 
 button:disabled {
@@ -691,9 +1089,13 @@ button:disabled {
 }
 
 button:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.03);
-  box-shadow: 0 14px 22px rgba(13, 101, 176, 0.3);
+  transform: translateY(-3px) scale(1.04);
+  filter: brightness(1.08);
+  box-shadow: 0 16px 28px rgba(139, 195, 74, 0.3);
+}
+
+button:active {
+  transform: translateY(-1px) scale(1.02);
 }
 
 .result-block {
@@ -813,19 +1215,26 @@ button:hover {
 .secondary-btn {
   text-align: center;
   text-decoration: none;
-  border: 1px solid rgba(21, 101, 176, 0.35);
+  border: 2px solid rgba(85, 139, 47, 0.35);
   color: var(--medical-blue-900);
   background: rgba(255, 255, 255, 0.52);
   padding: 11px;
   border-radius: 12px;
   font-weight: 600;
   backdrop-filter: blur(6px);
-  transition: transform 160ms ease, background-color 160ms ease;
+  transition: all 240ms ease, transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
 }
 
 .secondary-btn:hover {
-  background: rgba(240, 248, 255, 0.76);
-  transform: translateY(-1px);
+  background: rgba(241, 248, 233, 0.86);
+  border-color: rgba(139, 195, 74, 0.6);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(139, 195, 74, 0.2);
+}
+
+.secondary-btn:active {
+  transform: translateY(-1px) scale(1.01);
 }
 
 @media (max-width: 420px) {
@@ -868,5 +1277,99 @@ button:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes cardShimmer {
+  0% {
+    box-shadow: 0 16px 32px rgba(45, 80, 22, 0.16), 0 0 20px rgba(139, 195, 74, 0.2);
+  }
+  50% {
+    box-shadow: 0 16px 32px rgba(45, 80, 22, 0.24), 0 0 30px rgba(139, 195, 74, 0.35);
+  }
+  100% {
+    box-shadow: 0 16px 32px rgba(45, 80, 22, 0.16), 0 0 20px rgba(139, 195, 74, 0.2);
+  }
+}
+
+@keyframes navPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(139, 195, 74, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(139, 195, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 195, 74, 0);
+  }
+}
+
+@keyframes activeGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(139, 195, 74, 0.3), 0 4px 12px rgba(45, 80, 22, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(139, 195, 74, 0.5), 0 6px 16px rgba(45, 80, 22, 0.3);
+  }
+}
+
+@keyframes buttonBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
