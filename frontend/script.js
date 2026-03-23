@@ -142,26 +142,9 @@ function setApiStatus(statusElement, state, text) {
 }
 
 async function handleLoginPage() {
-  const loginForm = document.getElementById("loginForm");
-  if (!loginForm) return;
-
+  // New login system is now handled in login.html
+  // This function is kept for backwards compatibility
   setupInstallPrompt();
-
-  loginForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(loginForm);
-    const userProfile = {
-      name: String(formData.get("name") || "").trim(),
-      mobile: String(formData.get("mobile") || "").trim(),
-      email: String(formData.get("email") || "").trim(),
-    };
-
-    localStorage.setItem("userProfile", JSON.stringify(userProfile));
-    localStorage.removeItem("apiBaseUrl");
-
-    window.location.href = "form.html";
-  });
 }
 
 async function handleFormPage() {
@@ -211,6 +194,20 @@ async function handleFormPage() {
 
     try {
       const payload = parseFormValues(healthForm);
+      
+      // Add user information from localStorage (set during login)
+      const userId = localStorage.getItem('user_id');
+      const userName = localStorage.getItem('user_name');
+      
+      if (!userId || !userName) {
+        alert('User session expired. Please login again.');
+        window.location.href = 'login.html';
+        return;
+      }
+      
+      payload.user_id = parseInt(userId);
+      payload.user_name = userName;
+      
       localStorage.setItem("lastQuestionnaire", JSON.stringify(payload));
 
       const result = await requestPrediction(payload);
@@ -269,7 +266,8 @@ function renderPredictionResult(result) {
 async function handleResultPage() {
   const result = JSON.parse(localStorage.getItem("predictionResult") || "null");
   const lastQuestionnaire = JSON.parse(localStorage.getItem("lastQuestionnaire") || "null");
-  const profile = JSON.parse(localStorage.getItem("userProfile") || "{}");
+  const userName = localStorage.getItem("user_name") || "Patient";
+  const userId = localStorage.getItem("user_id");
 
   const userGreeting = document.getElementById("userGreeting");
   const riskLevelElement = document.getElementById("riskLevel");
@@ -278,8 +276,8 @@ async function handleResultPage() {
 
   if (!riskLevelElement || !confidenceElement || !recommendationList || !userGreeting) return;
 
-  if (profile.name) {
-    userGreeting.textContent = `Patient: ${profile.name}`;
+  if (userName) {
+    userGreeting.textContent = `Patient: ${userName}`;
   } else {
     userGreeting.textContent = "Prediction generated from your submitted questionnaire.";
   }
