@@ -3,14 +3,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ObesiCare</title>
-  <meta http-equiv="refresh" content="0; url=login.html" />
-  <script>
-    window.location.replace("login.html");
-  </script>
+  <title>ObesiCare | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0052CC" />
 </head>
-<body>
-  <p>Redirecting to ObesiCare login...</p>
-  <p><a href="login.html">Continue</a></p>
+<body class="home-page">
+  <header class="site-nav-wrap">
+    <nav class="site-nav" aria-label="Primary">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">+</span>
+        <span>ObesiCare</span>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link active" href="index.html">Home</a>
+        <a class="nav-link" href="login.html">Login</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="home-main">
+    <section class="hero-card">
+      <p class="eyebrow">Digital Preventive Healthcare</p>
+      <h1>Early Obesity Risk Intelligence for Adolescents</h1>
+      <p class="subtitle home-subtitle">
+        ObesiCare is an AI-powered medical web application that helps identify early obesity risk patterns
+        using lifestyle and health indicators, then provides clear recommendations for healthier outcomes.
+      </p>
+
+      <div class="hero-metrics" role="list" aria-label="App highlights">
+        <article class="metric" role="listitem">
+          <h3>AI Prediction</h3>
+          <p>Deep-learning risk screening in seconds.</p>
+        </article>
+        <article class="metric" role="listitem">
+          <h3>Clinical UX</h3>
+          <p>Designed like a modern medical dashboard.</p>
+        </article>
+        <article class="metric" role="listitem">
+          <h3>Personal Guidance</h3>
+          <p>Actionable recommendations for each result.</p>
+        </article>
+      </div>
+
+      <div class="hero-actions">
+        <a class="hero-btn" href="login.html">Start Assessment</a>
+        <a class="secondary-btn" href="login.html">Go to Login</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then((reg) => console.log('Service Worker registered:', reg))
+        .catch((err) => console.log('Service Worker registration failed:', err));
+    }
+  </script>
 </body>
 </html>
